@@ -7,16 +7,33 @@ public class ValidaSenha {
 
 	public boolean ehValida(String senha) {
 		
+		if(senha == null || senha.isEmpty()) {
+			return false;
+		}
+		
+		senha = senha.trim();
+		
+		String specialChars = senha.replaceAll("[a-zA-Z0-9]", "");
+		
+		if(specialChars.isEmpty()) {
+			return false;
+		}
+
 		if(senha.toCharArray().length < MIN_PASSWD_LENGTH){
 			return false;
-			
-		} else if(senha.toCharArray().length > MAX_PASSWD_LENGTH) {
+		} 
+
+		if(senha.toCharArray().length > MAX_PASSWD_LENGTH) {
 			return false;
-			
-		} else if(!senha.matches("(\\d*\\n*).([A-Z])+.(\\d*\\n*)")){
+		} 
+		
+		senha = senha.replaceAll("[^a-zA-Z0-9]", "");
+
+		if(!senha.matches("(\\d*\\w*).([A-Z])+.(\\d*\\w*)")){
 			return false;
-			
-		} else if(!senha.matches("(\\d*\\n*).([a-z])+.(\\d*\\n*)")){
+		}
+
+		if(!senha.matches("(\\d*\\w*).([a-z])+.(\\d*\\w*)")){
 			return false;
 		}
 		

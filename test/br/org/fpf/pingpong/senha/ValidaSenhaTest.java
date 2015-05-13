@@ -16,6 +16,27 @@ public class ValidaSenhaTest {
 	}
 	
 	@Test
+	public void teste_senha_nula_retorna_falso(){
+		senha = null;
+		
+		assertFalse(validador.ehValida(senha));
+	}
+	
+	@Test
+	public void teste_senha_espacos_retorna_falso(){
+		senha = "     ";
+		
+		assertFalse(validador.ehValida(senha));
+	}
+	
+	@Test
+	public void teste_senha_em_branco_retorna_falso(){
+		senha = "";
+		
+		assertFalse(validador.ehValida(senha));
+	}
+	
+	@Test
 	public void teste_senha_tamanho_minimo_retorna_falso(){
 		senha = "1234";
 		
@@ -31,14 +52,14 @@ public class ValidaSenhaTest {
 	
 	@Test
 	public void teste_senha_tamanho_minimo_retorna_verdadeiro(){
-		senha = "1aE45";
+		senha = "1aE4&";
 		
 		assertTrue(validador.ehValida(senha));
 	}
 	
 	@Test
 	public void teste_senha_tamanho_maximo_retorna_verdadeiro(){
-		senha = "1a3A567890";
+		senha = "1a3A567@90";
 		
 		assertTrue(validador.ehValida(senha));
 	}
@@ -57,4 +78,17 @@ public class ValidaSenhaTest {
 		assertFalse(validador.ehValida(senha));
 	}
 	
+	@Test
+	public void teste_senha_caracter_especial_retorna_falso(){
+		senha = "123A56a890";
+		
+		assertFalse(validador.ehValida(senha));
+	}
+	
+	@Test
+	public void teste_senha_caracter_especial_retorna_verdadeiro(){
+		senha = "1#3A56a890";
+		
+		assertTrue(validador.ehValida(senha));
+	}
 }
